@@ -66,15 +66,63 @@ class Board {
 
 	}
 
+	reveal(i, j) {
+		if(this.board[i][j] == -1){
+			console.log("Game over");
+			return true;
+		} else if(this.board[i][j] != 0) {
+			this.revealed[i][j] = true;
+			return false;
+		} else {
+
+			this.revealHelper(i, j);
+			return false;
+
+		}
+
+
+
+	}
+
+	revealHelper(i, j) {
+
+		if(i == 0 || i >= this.board.length || j == 0 || j >= this.board.length || this.revealed[i][j] == true || this.board[i][j] == -1) {
+			return;
+		} else if(this.board[i][j] > 0) {
+			this.revealed[i][j] = true;
+			return;
+		} else {
+			this.revealed[i][j] = true;
+
+			this.revealHelper(i + 1, j);  
+			this.revealHelper(i - 1, j);
+			this.revealHelper(i, j + 1); 
+			this.revealHelper(i, j - 1); 
+			this.revealHelper(i + 1, j + 1); 
+			this.revealHelper(i + 1, j - 1); 
+			this.revealHelper(i - 1, j + 1);
+			this.revealHelper(i - 1, j - 1);
+		
+		}
+
+
+	}
+
+	setRevealed(i, j) {
+		this.revealed[i][j] = true;
+	}
+
 	display() {
 		console.log(this.board);
 	}
 
 	constructor(size, bombs) {
+
 		this.size = size;
 		this.bombs = bombs;
 
 		this.board = [...Array(size)].map(e => Array(size).fill(0));
+		this.revealed = [...Array(size)].map(e => Array(size).fill(false));
 
 	}
 
