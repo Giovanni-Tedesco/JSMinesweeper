@@ -4,7 +4,7 @@ let gameOver = false;
 function setup() {
 
 
-	createCanvas(401, 401);
+	createCanvas(400, 400);
 
 
 	b.setBoard();
@@ -47,8 +47,8 @@ function draw() {
 
 function mouseClicked() {
 
-	let x = Math.floor(mouseX);
-	let y = Math.floor(mouseY);
+	let x = mouseX;
+	let y = mouseY;
 
 
 	gameOver = b.reveal(Math.floor(x / 40), Math.floor(y / 40));
@@ -61,7 +61,7 @@ function keyPressed() {
 
 	switch(key) {
 		case 'w':
-			console.log("pressed w");
+			// console.log("pressed w");
 			let randX = Math.floor(Math.random() * 10);
 			let randY = Math.floor(Math.random() * 10);
 			console.log()
